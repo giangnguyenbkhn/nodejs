@@ -1,0 +1,4 @@
+// cau hinh babel
+{
+  "presets": ["@babel/preset-env"]
+}
