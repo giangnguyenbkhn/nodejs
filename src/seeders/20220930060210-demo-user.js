@@ -16,3 +16,4 @@ module.exports = {
         return queryInterface.bulkDelete("Users", null, {});
     },
 };
+// file chứa dữ liệu mẫu seeders
