@@ -1,22 +1,23 @@
 "use strict";
 module.exports = {
     up: async(queryInterface, Sequelize) => {
-        await queryInterface.createTable("Users", {
+        await queryInterface.createTable("doctor-clinic-spelcialty", {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            firstName: {
-                type: Sequelize.STRING,
+            doctorId: {
+                type: Sequelize.INTEGER,
             },
-            lastName: {
-                type: Sequelize.STRING,
+            clinicId: {
+                type: Sequelize.INTEGER,
             },
-            email: {
-                type: Sequelize.STRING,
+            spelcialtyId: {
+                type: Sequelize.INTEGER,
             },
+
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
@@ -28,7 +29,7 @@ module.exports = {
         });
     },
     down: async(queryInterface, Sequelize) => {
-        await queryInterface.dropTable("Users");
+        await queryInterface.dropTable("doctor-clinic-spelcialty");
     },
 };
 // Migration cho phép bạn định nghĩa các bảng trong CSDL,
