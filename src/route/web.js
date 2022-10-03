@@ -7,7 +7,10 @@ let initWebRoutes = (app) => {
     router.get("/about", homeController.getAbout);
     router.get("/crud", homeController.getCRUD);
     //crud
+    //create
     router.post("/post-crud", homeController.postCRUD);
+    //read
+    router.get("/get-crud", homeController.displayGetCRUD);
     //mac dinh router deu phai bat dau bang /
     return app.use("/", router);
 };
