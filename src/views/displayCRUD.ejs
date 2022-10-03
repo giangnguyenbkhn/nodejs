@@ -22,6 +22,20 @@
         tr:hover {
             background-color: coral;
         }
+        
+        .btn-edit,
+        .btn-delete {
+            border: 1px solid green;
+            border-radius: 3px;
+            padding: 5px;
+            text-decoration: none;
+        }
+        
+        .btn-edit:hover,
+        .btn-delete:hover {
+            background-color: brown;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -33,6 +47,7 @@
             <td>Firstname</td>
             <td>Lastname</td>
             <td>Address</td>
+            <td>Action</td>
         </tr>
         <% for(let i=0; i < data.length; i++) { %>
             <tr>
@@ -47,6 +62,11 @@
                 </td>
                 <td>
                     <%=data[i].address %>
+                </td>
+                <td>
+                    <a href="/edit-crud?id=<%=data[i].id%>" class="btn-edit" type="button">Edit</a
+          >
+          <a class="btn-delete" type="button">Delete</a>
                 </td>
             </tr>
             <% } %>

@@ -11,6 +11,9 @@ let initWebRoutes = (app) => {
     router.post("/post-crud", homeController.postCRUD);
     //read
     router.get("/get-crud", homeController.displayGetCRUD);
+    //update
+    router.get("/edit-crud", homeController.getEditCRUD);
+    router.post("/put-crud", homeController.putCRUD);
     //mac dinh router deu phai bat dau bang /
     return app.use("/", router);
 };

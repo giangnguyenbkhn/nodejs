@@ -1,5 +1,7 @@
 //ma hoa password
 import bcrypt from "bcryptjs";
+import { raw } from "body-parser";
+import { where } from "sequelize";
 //database
 import db from "../models/index";
 
@@ -16,7 +18,7 @@ let hashUserPassword = (password) => {
     });
 };
 // create new user
-let createNewUser = async(data) => {
+let createNewUser = (data) => {
     return new Promise(async(resolve, reject) => {
         try {
             let hashPasswordFromBcrypt = await hashUserPassword(data.body.password);
@@ -37,10 +39,10 @@ let createNewUser = async(data) => {
     });
 };
 //read/display new user
-let getAllUser = async() => {
+let getAllUser = () => {
     return new Promise(async(resolve, reject) => {
         try {
-            let users = db.User.findAll({
+            let users = await db.User.findAll({
                 raw: true,
             });
             resolve(users);
@@ -49,6 +51,52 @@ let getAllUser = async() => {
         }
     });
 };
-
-module.exports = { createNewUser, getAllUser };
+//edit user
+let getUserInfoById = (userId) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let user = await db.User.findOne({ where: { id: userId }, raw: true });
+            if (user) {
+                resolve(user);
+            } else {
+                resolve({});
+            }
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+//update user
+let updateUserData = (data) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            // let user = await db.User.findOne({
+            //     where: { id: data.id },
+            // });
+            // if (user) {
+            //     user.firstName = data.firstname;
+            //     user.lastName = data.lastname;
+            //     user.address = data.address;
+            //     await user.save();
+            //     let allUsers = await db.User.findAll();
+            //     resolve(allUsers);
+            // } else {
+            //     resolve();
+            // }
+            await db.User.update({
+                firstName: data.firstname,
+                lastName: data.lastname,
+                address: data.address,
+            }, {
+                where: {
+                    id: data.id,
+                },
+            });
+            resolve("update user success");
+        } catch (e) {
+            console.log(e);
+        }
+    });
+};
+module.exports = { createNewUser, getAllUser, getUserInfoById, updateUserData };
 // 3
