@@ -14,6 +14,9 @@ let initWebRoutes = (app) => {
     //update
     router.get("/edit-crud", homeController.getEditCRUD);
     router.post("/put-crud", homeController.putCRUD);
+    //delete
+    // doi voi 1 duong link phai su dung method get
+    router.get("/delete-crud", homeController.deleteCRUD);
     //mac dinh router deu phai bat dau bang /
     return app.use("/", router);
 };

@@ -66,11 +66,15 @@
                 <td>
                     <a href="/edit-crud?id=<%=data[i].id%>" class="btn-edit" type="button">Edit</a
           >
-          <a class="btn-delete" type="button">Delete</a>
-                </td>
-            </tr>
-            <% } %>
+          <a
+            href="/delete-crud?id=<%=data[i].id%>"
+            class="btn-edit"
+            type="button"
+            >Delete</a
+          >
+        </td>
+      </tr>
+      <% } %>
     </table>
-</body>
-
+  </body>
 </html>
