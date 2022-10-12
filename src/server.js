@@ -7,10 +7,15 @@ import configViewEngine from "../src/config/viewEngine";
 import initWebRoutes from "../src/route/web";
 //connect DB
 import connectDB from "../src/config/connectDB";
+//cors
+import cors from "cors";
 require("dotenv").config();
 
 let app = express();
-let port = process.env.PORT || 3000;
+//use cors giup client co the gui request den api cua server
+app.use(cors({ credentials: true, origin: true }));
+
+let port = process.env.PORT || 8080;
 //config app bạn có thể lấy được data form từ req.body
 app.use(express.json());
 app.use(
@@ -27,3 +32,4 @@ connectDB();
 app.listen(port, () => {
     console.log(`Backend Nodejs is running on http://localhost:${port}`);
 });
+//cors https://anonystick.com/blog-developer/cors-la-gi-15-buc-anh-chuyen-dong-tinh-te-giup-ban-hieu-ro-ve-cors-2020080892125886

@@ -1,7 +1,7 @@
 import db from "../models/index";
 import userService from "../services/userService";
 let handleLogin = async(req, res) => {
-    // nhan email va password tu client
+    // nhan email va password tu client, cu the la tu file userService ben fe
     let email = req.body.email;
     let password = req.body.password;
     //check email exist
@@ -15,6 +15,7 @@ let handleLogin = async(req, res) => {
         });
     }
     let userData = await userService.handleUserLogin(email, password);
+    //tra data ve cho client
     return res.status(200).json({
         errCode: userData.errCode,
         message: userData.errMessage,
