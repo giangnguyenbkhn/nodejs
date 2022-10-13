@@ -1,5 +1,6 @@
 import db from "../models/index";
 import bcrypt from "bcryptjs";
+//compare password
 let handleUserLogin = (email, password) => {
     return new Promise(async(resolve, reject) => {
         try {
@@ -59,5 +60,32 @@ let checkUserEmail = (userEmail) => {
         }
     });
 };
+//getAllUsers
+let getAllUsers = (userId) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let users = "";
+            if (userId === "ALL") {
+                users = await db.User.findAll({
+                    attributes: {
+                        exclude: ["password"],
+                    },
+                });
+            }
+            if (userId && userId !== "ALL") {
+                users = await db.User.findOne({
+                    where: { id: userId },
+                    attributes: {
+                        exclude: ["password"],
+                    },
+                    // config raw:true tren config.json de thay the cac lan su dung sau
+                });
+            }
+            resolve(users);
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
 
-module.exports = { handleUserLogin };
+module.exports = { handleUserLogin, getAllUsers };

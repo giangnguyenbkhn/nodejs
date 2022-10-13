@@ -21,6 +21,8 @@ let initWebRoutes = (app) => {
     //API
     //API login
     router.post("/api/login", userController.handleLogin);
+    //API get all user
+    router.get("/api/get-all-users", userController.handleGetAllUsers);
     //mac dinh router deu phai bat dau bang /
     return app.use("/", router);
 };
