@@ -23,7 +23,7 @@ let handleLogin = async(req, res) => {
     });
 };
 let handleGetAllUsers = async(req, res) => {
-    let id = req.body.id; //ALL,id
+    let id = req.query.id; //ALL,id
     //khong truyen id tra ve loi
     if (!id) {
         return res.status(200).json({
@@ -32,7 +32,8 @@ let handleGetAllUsers = async(req, res) => {
             users: [],
         });
     }
-    console.log(users);
+    let users = await userService.getAllUsers(id);
+    // console.log(users);
     return res.status(200).json({
         errCode: 0,
         errMessage: "OK",
