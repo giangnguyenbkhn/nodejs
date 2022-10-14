@@ -22,6 +22,7 @@ let handleLogin = async(req, res) => {
         user: userData.user ? userData.user : {},
     });
 };
+//get all user
 let handleGetAllUsers = async(req, res) => {
     let id = req.query.id; //ALL,id
     //khong truyen id tra ve loi
@@ -40,4 +41,43 @@ let handleGetAllUsers = async(req, res) => {
         users: users,
     });
 };
-module.exports = { handleLogin, handleGetAllUsers };
+//create new user
+let handleCreateNewUser = async(req, res) => {
+    let message = await userService.createNewUser(req);
+    console.log(message);
+    return res.status(200).json({
+        message: message,
+    });
+};
+//edit user
+let handleEditUser = async(req, res) => {
+    let data = req.body;
+    if (!req.body.id) {
+        return res.status(200).json({
+            errCode: 2,
+            message: "Missing required parameter",
+        });
+    }
+    let message = await userService.editUser(data);
+    return res.status(200).json(message);
+};
+//delete user
+let handleDeleteUser = async(req, res) => {
+    if (!req.body.id) {
+        return res.status(200).json({
+            errCode: 1,
+            message: "Missing required parameter",
+        });
+    }
+
+    let message = await userService.deleteUser(req.body.id);
+    return res.status(200).json(message);
+};
+
+module.exports = {
+    handleLogin,
+    handleGetAllUsers,
+    handleCreateNewUser,
+    handleEditUser,
+    handleDeleteUser,
+};

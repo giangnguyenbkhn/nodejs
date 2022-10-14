@@ -23,6 +23,12 @@ let initWebRoutes = (app) => {
     router.post("/api/login", userController.handleLogin);
     //API get all user
     router.get("/api/get-all-users", userController.handleGetAllUsers);
+    //API create new user
+    router.post("/api/create-new-user", userController.handleCreateNewUser);
+    //API edit user
+    router.put("/api/edit-user", userController.handleEditUser);
+    //API delete user
+    router.delete("/api/delete-user", userController.handleDeleteUser);
     //mac dinh router deu phai bat dau bang /
     return app.use("/", router);
 };
