@@ -106,23 +106,23 @@ let createNewUser = (data) => {
     return new Promise(async(resolve, reject) => {
         try {
             //check email is exist
-            let check = await checkUserEmail(data.body.email);
+            let check = await checkUserEmail(data.email);
             if (check === true) {
                 resolve({
                     errCode: 1,
-                    message: "Your email is already in used,Please try another email",
+                    errMessage: "Your email is already in used,Please try another email",
                 });
             } else {
-                let hashPasswordFromBcrypt = await hashUserPassword(data.body.password);
+                let hashPasswordFromBcrypt = await hashUserPassword(data.password);
                 await db.User.create({
-                    email: data.body.email,
+                    email: data.email,
                     password: hashPasswordFromBcrypt,
-                    firstName: data.body.firstname,
-                    lastName: data.body.lastname,
-                    address: data.body.address,
-                    phonenumber: data.body.phonenumber,
-                    gender: data.body.gender === "1" ? true : false,
-                    roleId: data.body.roleId,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    address: data.address,
+                    phonenumber: data.phonenumber,
+                    gender: data.gender === "1" ? true : false,
+                    roleId: data.roleId,
                 });
                 resolve({
                     errCode: 0,
@@ -141,8 +141,8 @@ let editUser = (data) => {
             let user = await db.User.findOne({ where: { id: data.id } });
             if (user) {
                 await db.User.update({
-                    firstName: data.firstname,
-                    lastName: data.lastname,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
                     address: data.address,
                 }, {
                     where: {
